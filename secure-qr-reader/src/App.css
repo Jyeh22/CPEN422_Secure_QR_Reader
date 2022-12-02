@@ -16,3 +16,16 @@
   width: 70vw !important; 
   max-width: 70vw !important;
 }
+
+.video-mask {
+  -webkit-transform: trasnlateZ(0);
+  display: flex;
+  width: fit-content !important;
+  height: fit-content;
+  margin-bottom: 3rem;
+  margin-top: 2rem !important;
+  padding: 0px !important;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 5px 5px rgba(102, 102, 102, 0.1);
+}

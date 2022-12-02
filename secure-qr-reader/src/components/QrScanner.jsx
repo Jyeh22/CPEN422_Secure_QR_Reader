@@ -33,9 +33,7 @@ export default class QrScanner extends Component {
   }
   render(){
       const previewStyle = {
-        width: '50%',
-        marginBottom: '3rem',
-        marginTop: '3rem',
+        width: '30rem',
       }
       const loadingStyle = {
         width: '50%',
@@ -46,13 +44,14 @@ export default class QrScanner extends Component {
       }
     return (
       <>
-      { !this.state.validatingUrl &&
-        <QrReader
-          delay={this.state.delay}
-          style={previewStyle}
-          onError={this.handleError}
-          onScan={this.handleScan}
-        />
+      { !this.state.validatingUrl && <div className="video-mask">
+          <QrReader
+            delay={this.state.delay}
+            style={previewStyle}
+            onError={this.handleError}
+            onScan={this.handleScan}
+          />
+        </div>
       }
       { this.state.validatingUrl &&
         <div style = {loadingStyle}>
