@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -21,4 +10,9 @@
   justify-content: center;
   font-size: calc(15px + 2rem);
   color: white;
+}
+
+ .modal-60w {
+  width: 70vw !important; 
+  max-width: 70vw !important;
 }

@@ -6,7 +6,9 @@
 const path = require('path');
 const getScreencap = require("./web_content_extractor.js");
 const express = require('express');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const cors = require('cors');
+require('dotenv').config();
 
 const host = 'localhost';
 const port = 5000;
@@ -22,12 +24,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.text({ type: "text/plain" }));
 app.use(logRequest);	
 
+app.use(cors({
+  credentials: true, 
+  origin: process.env.DOMAIN_NAME,
+  methods: ["POST", "PUT", "GET", "OPTIONS", "DELETE", "HEAD"]
+}));
+
 app.use('/', express.static(clientApp, { extensions: ['html'] }));
 app.listen(port, () => {
 	console.log(`${new Date()}  App Started. Listening on ${host}:${port}, serving ${clientApp}`);
 });
 
 app.put("/screencap",async (req, res)=> {
-    var url = req.body;
+    var url = req.body.url;
     res.send(await getScreencap(url));
 })
