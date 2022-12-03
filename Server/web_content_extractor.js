@@ -17,7 +17,9 @@ const puppeteer = require('puppeteer')
 //Takes a string representing a url
 async function getScreencap(url) {
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            ignoreHTTPSErrors: true,
+        });
         const page = await browser.newPage();
         //for mobile case
         //await page.emulate(puppeteer.KnownDevices["iPhone 13 Pro"])
