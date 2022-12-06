@@ -5,12 +5,14 @@ import Accordion from 'react-bootstrap/Accordion';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import ListGroup from 'react-bootstrap/ListGroup';
 import api from '../api';
 
 
 const HandleURL = ({url, setDecodedQr}) => {
   const [image, setImage] = useState(null);
   const [show, setShow] = useState(false);
+  const [viewDetails, setView] = useState(false);
 
 
   const getImage = async () => {
@@ -43,37 +45,53 @@ const HandleURL = ({url, setDecodedQr}) => {
   }
 
   return (
-    <Alert key={'warning'} variant={'warning'} style={{width:'50%', border:'none', marginTop:'3rem'}}>
+    <Alert key={'warning'} variant={'danger'} style={{width:'50%', border:'none', marginTop:'3rem'}}>
+      <Alert.Heading>Deceptive Site!</Alert.Heading>
+      <p> <b>{url}</b> has been determined to be unsafe</p>
+      <p>Attackers on this site may trick you into doing something dangerous like installing a program or revealing personal information</p>
+      <hr/>
+      <style type="text/css">
+        {`
+      .warning-details>.accordion-button::after {
+        margin-left: auto !important;
+        content: "View details";
+      }
+      `}
+      </style>
       <Row>
         <Accordion style={{width: '100%'}}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Bad things happened yaddie yaddie ya</Accordion.Header>
+            <Accordion.Header className='warning-details' onClick={() => setView(!viewDetails)}> </Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
+                <ListGroup variant="flush">
+                  <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                  <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                  <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                  <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                </ListGroup>
+              <Row style={{display: 'flex', felxWrap:'wrap', justifyContent:'space-between', flexWrap:'warp', marginTop:'20px'}}>
+                <Button variant="outline-dark" style={{width:'9rem', marginLeft:'12px'}} onClick={handleCancel}>
+                  Cancel
+                </Button>
+                <div style={{width:'auto', padding:'0px', flexWrap:'wrap'}}>
+                  <Button variant="outline-danger" href={url} style={{width:'9rem', marginRight:'1rem'}}>
+                    Visit Website
+                  </Button>
+                  <Button variant="warning" style={{width:'9rem'}} onClick={getImage}>
+                    View Snapshot
+                  </Button>
+                </div>
+            </Row>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
       </Row>
-      <hr />
-      <Row style={{display: 'flex', justifyContent:'space-between', flexWrap:'nowrap'}}>
-        <Button variant="outline-dark" style={{width:'9rem', marginLeft:'12px'}} onClick={handleCancel}>
+      { !viewDetails && <Row style={{display: 'flex', justifyContent:'space-between', flexWrap:'nowrap'}}>
+        <Button variant="outline-dark" style={{width:'9rem', marginLeft:'32px'}} onClick={handleCancel}>
           Cancel
         </Button>
-        <div style={{width:'auto'}}>
-          <Button variant="outline-danger" href={url} style={{width:'9rem', marginRight:'1rem'}}>
-            Visit Website
-          </Button>
-          <Button variant="warning" style={{width:'9rem'}} onClick={getImage}>
-            View Webpage
-          </Button>
-        </div>
-      </Row>
+      </Row>}
       <Modal show={show} onHide={handleClose} dialogClassName="modal-60w">
         <Modal.Header closeButton>
           <Modal.Title>Static Image of Webpage</Modal.Title>

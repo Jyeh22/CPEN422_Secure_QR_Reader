@@ -16,7 +16,7 @@ const App = () => {
   const [url, setUrl] = useState(null);
 
   const startButtonStyle = {
-    width: '50%',
+    width: '30rem',
     marginTop: startScan ? '' : '15rem'
   }
 
@@ -34,7 +34,7 @@ const App = () => {
             setUrlMetrics={setUrlMetrics}
           />}
         {!decodedQr && <Row style={{justifyContent: 'center'}}> 
-            <Button variant="outline-primary" style={startButtonStyle} onClick={ () => setStartScan(!startScan) }>
+            <Button variant="primary" style={startButtonStyle} onClick={ () => setStartScan(!startScan) }>
                 {startScan ? "Cancel Scan" : "Scan QR Code"}
             </Button>
           </Row>
