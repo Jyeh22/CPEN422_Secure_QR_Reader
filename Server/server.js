@@ -5,6 +5,7 @@
 
 const path = require('path');
 const getScreencap = require("./web_content_extractor.js");
+const analyzeQR = require("./QRdata_analyzer.js");
 const express = require('express');
 const bodyParser = require("body-parser");
 const cors = require('cors');
@@ -38,4 +39,9 @@ app.listen(port, () => {
 app.put("/screencap",async (req, res)=> {
     var url = req.body.url;
     res.send(await getScreencap(url));
+})
+
+app.put("/QRAnalysis",async (req, res)=>{
+    var data = req.body.data;
+    res.send(await analyzeQR(data));
 })
