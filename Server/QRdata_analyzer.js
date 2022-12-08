@@ -1,5 +1,6 @@
 const {PythonShell} = require('python-shell');
 const { text } = require('body-parser');
+const request = require('request');
 
 //calls python script with url analysis funtionality
 var anayzeURL = function(url){
@@ -81,14 +82,19 @@ var analyzeQR = function(data){
     results['type'] = typeCheck(data);
 
     if (results.type == 'url'){
-        var urlresults = JSON.parse(anayzeURL(data));
+        //obtain the final redirect url
+        var r = request.get(data, function (err, res, body) {
+            results['plaintext'] = r.uri.href
+        });
+        var urlresults = JSON.parse(anayzeURL(results['plaintext']));
         results = Object.assign({},results,urlresults);
     }
     return results;
 }
 
-//console.log(analyzeQR("https://www.fatburgercanada.com/menu/"));
-
+//redirects to a wikipedia redirect to https://www.wikipedia.org/
+//console.log(analyzeQR("https://tinyurl.com/myxau9ek"));
+//console.log(analyzeQR('https://www.wikipedia.org/'))
 //test typecheck
 /*
 var typetest = ['https://en.wikipedia.org/wiki/Mapo_tofu',
