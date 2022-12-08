@@ -49,8 +49,12 @@ export default class QrScanner extends Component {
           <QrReader
             scanDelay={this.state.delay}
             style={previewStyle}
-            onError={this.handleError}
-            onResult={this.handleScan}
+            onResult={ (result, error) => {
+              if (!!result)
+                return this.handleScan;
+              if(!!error)
+               return this.handleError;
+            }}
           />
         </div>
       }
