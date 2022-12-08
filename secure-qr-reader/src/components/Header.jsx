@@ -4,7 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 const Header = () => {
   return (
     <header className="App-header">
-      <p style={{marginBottom:'0px'}}>Secure QR Scanner</p>
+      <p className="header-title">SeQR</p>
 
       <style type="text/css">
         {`
@@ -53,7 +53,7 @@ const Header = () => {
       </style>
       <Accordion>
       <Accordion.Item eventKey="0">
-        <Accordion.Header>Protect yourself from malicious websites.</Accordion.Header>
+        <Accordion.Header>Protect yourself from malicious QR Codes.</Accordion.Header>
           <Accordion.Body>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

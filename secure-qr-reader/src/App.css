@@ -9,9 +9,13 @@
   align-items: center;
   justify-content: center;
   font-size: calc(15px + 2rem);
+  font-weight: bold;
   color: white;
 }
-
+.header-title {
+  margin-bottom: 0px;
+  font-size: 72px;
+}
  .modal-60w {
   width: 70vw !important; 
   max-width: 70vw !important;

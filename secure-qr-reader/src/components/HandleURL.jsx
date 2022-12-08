@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {FaCheck, FaTimes} from 'react-icons/fa'
 import api from '../api';
 
 
@@ -56,6 +57,17 @@ const HandleURL = ({url, setDecodedQr}) => {
         margin-left: auto !important;
         content: "View details";
       }
+      .accordion-button:not(.collapsed)::after {
+        content: "Hide details";
+      }
+      .list-group {
+        --bs-list-group-color: inherit;
+        --bs-list-group-bg: inherit;
+      }
+      .list-group .valid-list{
+        color: #0f5132;
+        background-color: #d1e7dd;
+      }
       `}
       </style>
       <Row>
@@ -64,11 +76,10 @@ const HandleURL = ({url, setDecodedQr}) => {
             <Accordion.Header className='warning-details' onClick={() => setView(!viewDetails)}> </Accordion.Header>
               <Accordion.Body>
                 <ListGroup variant="flush">
-                  <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                  <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                  <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                  <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                  <ListGroup.Item><FaTimes/><b>Known phishing site</b></ListGroup.Item>
+                  <ListGroup.Item className='valid-list'><FaCheck/> <b>Valid certificate</b></ListGroup.Item>
+                  <ListGroup.Item ><FaTimes/> <b>Known website</b></ListGroup.Item>
+                  <ListGroup.Item ><FaTimes/> <b>Domain Age</b></ListGroup.Item>
                 </ListGroup>
               <Row style={{display: 'flex', felxWrap:'wrap', justifyContent:'space-between', flexWrap:'warp', marginTop:'20px'}}>
                 <Button variant="outline-dark" style={{width:'9rem', marginLeft:'12px'}} onClick={handleCancel}>
@@ -94,7 +105,7 @@ const HandleURL = ({url, setDecodedQr}) => {
       </Row>}
       <Modal show={show} onHide={handleClose} dialogClassName="modal-60w">
         <Modal.Header closeButton>
-          <Modal.Title>Static Image of Webpage</Modal.Title>
+          <Modal.Title>Snapshot of Webpage</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{overflow:'scroll', display:'flex', justifyContent:'center'}}>
           { (image == null) &&         

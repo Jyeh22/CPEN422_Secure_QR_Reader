@@ -17,12 +17,12 @@ const App = () => {
 
   const startButtonStyle = {
     width: '30rem',
-    marginTop: startScan ? '' : '15rem'
+    marginTop: startScan ? '' : '5rem'
   }
 
   return (
     <Container>
-      <Row style={{marginTop: '3rem'}}>
+      <Row>
         <Header/>
       </Row>
       <Row style={{justifyContent: 'center'}}>
