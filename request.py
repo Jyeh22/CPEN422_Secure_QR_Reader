@@ -88,11 +88,15 @@ def googletree(sitename):
         'key': api_key,
     }
     url = service_url + '?' + urllib.parse.urlencode(params)
-    response = json.loads(urllib.request.urlopen(url).read())
+    try:
+        response = json.loads(urllib.request.urlopen(url).read())
+        x = len(response['itemListElement'])
+        values.update({"googleTree": x})
+    except:
+        values.update({"googleTree": "Error"})
+
     # for element in response['itemListElement']:
         # print(element['result']['name'] + ' (' + str(element['resultScore']) + ')')
-    x = len(response['itemListElement'])
-    values.update({"googleTree": x})
 
 
 # Param: url - website name with domain code (ex. amazon.com)
@@ -165,7 +169,7 @@ def siteTrust(url):
 
 def SSLcheck(url):
     APIkey = 'db1ec466f4fe2f87bb914d65ded54ebd73fd7151'
-    ssl = 'https://endpoint.apivoid.com/sslinfo/v1/pay-as-you-go/?key=' + APIkey + '&host=futbin.com'
+    ssl = 'https://endpoint.apivoid.com/sslinfo/v1/pay-as-you-go/?key=' + APIkey + '&host=' + url
     response = requests.get(ssl)
     parsed = json.loads(response.content)
 
