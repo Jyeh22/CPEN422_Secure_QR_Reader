@@ -45,10 +45,11 @@ export default class QrScanner extends Component {
       }
     return (
       <>
-      { !this.state.validatingUrl && <div className="video-mask">
+      { !this.state.validatingUrl && 
           <QrReader
             scanDelay={this.state.delay}
             style={previewStyle}
+            className="video-mask"
             onResult={ (result, error) => {
               if (!!result)
                 return this.handleScan;
@@ -56,7 +57,7 @@ export default class QrScanner extends Component {
                return this.handleError;
             }}
           />
-        </div>
+        
       }
       { this.state.validatingUrl &&
         <div style = {loadingStyle}>
