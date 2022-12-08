@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-//import QrReader from 'react-qr-scanner'
+import QrReader from 'react-qr-scanner'
 import Spinner from 'react-bootstrap/Spinner';
-import { QrReader } from 'react-qr-reader';
+
 
 export default class QrScanner extends Component {
   constructor(props){
     super(props)
     this.state = {
-      delay: 300,
+      delay: 100,
       result: 'No result',
       validatingUrl: false,
       image:null,
@@ -45,19 +45,14 @@ export default class QrScanner extends Component {
       }
     return (
       <>
-      { !this.state.validatingUrl && 
+      { !this.state.validatingUrl && <div className="video-mask">
           <QrReader
-            scanDelay={this.state.delay}
+            delay={this.state.delay}
             style={previewStyle}
-            className="video-mask"
-            onResult={ (result, error) => {
-              if (!!result)
-                return this.handleScan;
-              if(!!error)
-               return this.handleError;
-            }}
+            onError={this.handleError}
+            onScan={this.handleScan}
           />
-        
+        </div>
       }
       { this.state.validatingUrl &&
         <div style = {loadingStyle}>
