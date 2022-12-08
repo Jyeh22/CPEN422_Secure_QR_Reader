@@ -23,6 +23,8 @@ values = {
     "googleTree": "unknown",
 }
 
+inputstr = input()
+
 if "www" in inputstr:
     dotone = inputstr.find('.') + 1
     inputstrsplit = inputstr[dotone:]
