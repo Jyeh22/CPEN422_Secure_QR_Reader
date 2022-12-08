@@ -24,7 +24,7 @@ async function getScreencap(url) {
         //for mobile case
         //await page.emulate(puppeteer.KnownDevices["iPhone 13 Pro"])
         await page.emulateMediaType('screen');
-        await page.goto(url, {waitUntil: "domcontentloaded"});
+        await page.goto(url, {waitUntil: "networkidle2"});
         
         var screenshot =  await page.screenshot({   /*path: 'screenshot.png',*/ 
                                                     fullPage : true,
