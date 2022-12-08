@@ -23,15 +23,29 @@ values = {
     "googleTree": "unknown",
 }
 
-inputstr = input()
-#inputstr = "https://www.dataquest.io/blog/web-scraping-python-using-beautiful-soup/"
-dotone = inputstr.find('.') + 1
-inputstrsplit = inputstr[dotone:]
-dottwo = inputstrsplit.find('.') + dotone
-sitename = inputstr[dotone:dottwo]
+if "www" in inputstr:
+    dotone = inputstr.find('.') + 1
+    inputstrsplit = inputstr[dotone:]
+    dottwo = inputstrsplit.find('.') + dotone
+    sitename = inputstr[dotone:dottwo]
+    endslash = inputstrsplit.find('/') + dotone
+    # if there are no slashes after the .com
+    if endslash <= dotone:
+        url = inputstr[dotone:len(inputstr)]
+    else:
+        url = inputstr[dotone:endslash]
+    #url = inputstr[dotone:endslash]
+else:
+    firstslash = inputstr.find('/') + 2
+    inputstrsplit = inputstr[firstslash:]
+    dottwo = inputstrsplit.find('.') + firstslash
+    sitename = inputstr[firstslash:dottwo]
+    endslash = inputstrsplit.find('/') + firstslash
+    if endslash <= firstslash:
+        url = inputstr[firstslash:len(inputstr)]
+    else:
+        url = inputstr[firstslash:endslash]
 
-endslash = inputstrsplit.find('/') + dotone
-url = inputstr[dotone:endslash]
 
 if not validators.url(inputstr):
     print("not a valid url")
