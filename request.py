@@ -23,7 +23,8 @@ values = {
     "googleTree": "unknown",
 }
 
-inputstr = "https://www.dataquest.io/blog/web-scraping-python-using-beautiful-soup/"
+inputstr = input()
+#inputstr = "https://www.dataquest.io/blog/web-scraping-python-using-beautiful-soup/"
 dotone = inputstr.find('.') + 1
 inputstrsplit = inputstr[dotone:]
 dottwo = inputstrsplit.find('.') + dotone
@@ -31,9 +32,6 @@ sitename = inputstr[dotone:dottwo]
 
 endslash = inputstrsplit.find('/') + dotone
 url = inputstr[dotone:endslash]
-
-print(sitename)
-print(url)
 
 if not validators.url(inputstr):
     print("not a valid url")
@@ -117,7 +115,7 @@ def ageCheck(url):
         # print(key, ":", value)
         if key == "domain_creation_date":
             values.update({"date": value})
-            print("Domain created on", value)
+            #print("Domain created on", value)
             return value
 
 
@@ -161,7 +159,7 @@ def siteTrust(url):
 
     for key, value in parsed.items():
         if key == "trust_score":
-            print("Trust Score", value["result"])
+            #print("Trust Score", value["result"])
             values.update({"trustScore": value})
 
 
@@ -193,6 +191,8 @@ domRep(url)
 siteTrust(url)
 SSLcheck(url)
 
+print(values)
+
 '''
 print(values["date"])
 print(values["domDetected"])
@@ -202,3 +202,7 @@ print(values["certValid"])
 print(values["googleTree"])
 print(values["transparencyRep"])
 '''
+
+
+
+
