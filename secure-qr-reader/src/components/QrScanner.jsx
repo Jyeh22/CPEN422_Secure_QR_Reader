@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-scanner'
 import Spinner from 'react-bootstrap/Spinner';
-
+import api from '../api';
 
 export default class QrScanner extends Component {
   constructor(props){
@@ -16,14 +16,21 @@ export default class QrScanner extends Component {
     this.handleScan = this.handleScan.bind(this)
   }
 
-  handleScan = (data) => {
+  handleScan = async (data) => {
     if (data != null) {
       console.log(data);
       this.setState({
         validatingUrl: true,
         result: data,
       })
+      let res = await api.getMetrics(
+        {
+          data: data.text
+        }
+      );
+      console.log(res);
       this.props.setUrl(data.text);
+      this.props.setUrlMetrics(res.data);
       this.props.setDecodedQr(true);
       this.props.setStartScan(false);
     }

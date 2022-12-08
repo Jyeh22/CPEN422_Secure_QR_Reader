@@ -12,7 +12,7 @@ const App = () => {
 
   const [startScan, setStartScan] =  useState(false);
   const [decodedQr, setDecodedQr] =  useState(false);
-  const [urlMetrics, setUrlMetrics] = useState(false);
+  const [urlMetrics, setUrlMetrics] = useState(null);
   const [url, setUrl] = useState(null);
 
   const startButtonStyle = {
