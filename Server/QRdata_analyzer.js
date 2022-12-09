@@ -74,10 +74,7 @@ var analyzeQR = function(data){
             });
 
             //call python script
-            let options = {
-                pythonPath: 'C:/Users/rclay/AppData/Local/Programs/Python/Python311/python.exe',
-              };
-            let pyshell = new PythonShell('urlAnalysis.py', options);
+            let pyshell = new PythonShell('urlAnalysis.py');
             pyshell.send(results['plaintext']);
 
             pyshell.on('message', (message)=>{

@@ -131,7 +131,7 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
                       <Accordion style = {{width:'100%'}}>
                           <Accordion.Header style={{width:'100%'}}>
                             {knownSite ? <FaMinus/> : <FaTimes/>}
-                            <b>Known website name</b>
+                            {knownSite ? <b>Known website</b> : <b>Unknown Website</b>}
                         </Accordion.Header>
                         <Accordion.Body>
                           This website name has a low score in the <a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">google knowledge graph</a>.
