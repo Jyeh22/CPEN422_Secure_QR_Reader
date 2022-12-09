@@ -111,7 +111,7 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
                         </Accordion.Header>
                         <Accordion.Body>
                           {knownPhish ? 
-                            'This url has appeared in several databases of known phishing website' :
+                            'This url has appeared in several databases of known phishing websites' :
                             'Lorem ipsum'}
                         </Accordion.Body>
                       </Accordion>

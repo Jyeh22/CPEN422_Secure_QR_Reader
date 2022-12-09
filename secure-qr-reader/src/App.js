@@ -35,7 +35,7 @@ const App = () => {
             setSecurityMetrics={setSecurityMetrics}
           />*/}
         {!decodedQr && <Row style={{justifyContent: 'center'}}> 
-            <Button variant="primary" style={startButtonStyle} onClick={ setStartScan(!startScan)}>
+            <Button variant="primary" style={startButtonStyle} onClick={ () => setStartScan(!startScan)}>
                 {startScan ? "Cancel Scan" : "Scan QR Code"}
             </Button>
           </Row>
