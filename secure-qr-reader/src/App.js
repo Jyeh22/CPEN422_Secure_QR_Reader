@@ -27,13 +27,13 @@ const App = () => {
         <Header/>
       </Row>
       <Row style={{justifyContent: 'center'}}>
-        {(startScan) /*&& 
+        {(startScan) && 
           <QrScanner 
             setUrl={setUrl} 
             setDecodedQr={setDecodedQr} 
             setStartScan={setStartScan} 
             setSecurityMetrics={setSecurityMetrics}
-          />*/}
+          />}
         {!decodedQr && <Row style={{justifyContent: 'center'}}> 
             <Button variant="primary" style={startButtonStyle} onClick={ () => setStartScan(!startScan)}>
                 {startScan ? "Cancel Scan" : "Scan QR Code"}
