@@ -2,22 +2,6 @@ const {PythonShell} = require('python-shell');
 const { text } = require('body-parser');
 const request = require('request');
 
-//calls python script with url analysis funtionality
-var anayzeURL = function(url){
-    let pyshell = new PythonShell('urlAnalysis.py');
-    pyshell.send(data);
-
-    pyshell.on('message', (message)=>{
-        console.log(message);
-        return message;
-    })
-
-    pyshell.end(function (err,code,signal) {
-        if (err) throw err;
-        console.log('finished');
-    });
-}
-
 //checks what type of type of data the qr code contains
 //This is based on https://github.com/zxing/zxing/wiki/Barcode-Contents
 var typeCheck = function(data){
@@ -78,23 +62,45 @@ var typeCheck = function(data){
 
 //main function
 var analyzeQR = function(data){
-    var results = {"plaintext":data};
-    results['type'] = typeCheck(data);
 
-    if (results.type == 'url'){
-        //obtain the final redirect url
-        var r = request.get(data, function (err, res, body) {
-            results['plaintext'] = r.uri.href
-        });
-        var urlresults = JSON.parse(anayzeURL(results['plaintext']));
-        results = Object.assign({},results,urlresults);
-    }
-    return results;
+    return new Promise((resolve)=>{
+        var results = {"plaintext":data};
+        results['type'] = typeCheck(data);
+
+        if (results.type == 'url'){
+            //obtain the final redirect url
+            var r = request.get(data, function (err, res, body) {
+                results['plaintext'] = r.uri.href
+            });
+
+            //call python script
+            let pyshell = new PythonShell('urlAnalysis.py');
+            pyshell.send(results['plaintext']);
+
+            pyshell.on('message', (message)=>{
+                var urlresults = JSON.parse(message.replace(/'/g, '"').replaceAll('True', 'true'));
+                results = Object.assign({},results,urlresults);
+                resolve(results);
+            })
+
+            pyshell.end(function (err,code,signal) {
+                if (err) throw err;
+                console.log('finished');
+            });
+            
+        }
+        else {resolve(results);}
+    });
+    
+    
 }
 
 //redirects to a wikipedia redirect to https://www.wikipedia.org/
 //console.log(analyzeQR("https://tinyurl.com/myxau9ek"));
 //console.log(analyzeQR('https://www.wikipedia.org/'))
+//phishing website
+//console.log(analyzeQR('http://starterra.live'));
+
 //test typecheck
 /*
 var typetest = ['https://en.wikipedia.org/wiki/Mapo_tofu',

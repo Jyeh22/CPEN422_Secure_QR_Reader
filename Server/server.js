@@ -43,5 +43,9 @@ app.put("/screencap",async (req, res)=> {
 
 app.put("/QRAnalysis",async (req, res)=>{
     var data = req.body.data;
-    res.send(await analyzeQR(data));
+    analyzeQR(data).then((result)=>{
+        res.send(result);
+        //console.log(result);
+    });
+    
 })
