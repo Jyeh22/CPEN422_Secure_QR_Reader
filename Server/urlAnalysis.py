@@ -6,7 +6,6 @@ from selenium import webdriver
 import json
 import urllib
 
-from pytrends.request import TrendReq
 try:
     from googlesearch import search
 except ImportError:

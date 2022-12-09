@@ -5,6 +5,7 @@ import {Header, QrScanner, HandleURL} from './components'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import api from './api';
 
 import './App.css';
 
@@ -12,7 +13,7 @@ const App = () => {
 
   const [startScan, setStartScan] =  useState(false);
   const [decodedQr, setDecodedQr] =  useState(false);
-  const [urlMetrics, setUrlMetrics] = useState(null);
+  const [securityMetrics, setSecurityMetrics] = useState(null);
   const [url, setUrl] = useState(null);
 
   const startButtonStyle = {
@@ -26,20 +27,20 @@ const App = () => {
         <Header/>
       </Row>
       <Row style={{justifyContent: 'center'}}>
-        {(startScan) && 
+        {(startScan) /*&& 
           <QrScanner 
             setUrl={setUrl} 
             setDecodedQr={setDecodedQr} 
             setStartScan={setStartScan} 
-            setUrlMetrics={setUrlMetrics}
-          />}
+            setSecurityMetrics={setSecurityMetrics}
+          />*/}
         {!decodedQr && <Row style={{justifyContent: 'center'}}> 
-            <Button variant="primary" style={startButtonStyle} onClick={ () => setStartScan(!startScan) }>
+            <Button variant="primary" style={startButtonStyle} onClick={ setStartScan(!startScan)}>
                 {startScan ? "Cancel Scan" : "Scan QR Code"}
             </Button>
           </Row>
         }
-        {decodedQr && <HandleURL url={url} setDecodedQr={setDecodedQr}/>}
+        {decodedQr && <HandleURL securityMetrics={securityMetrics} setDecodedQr={setDecodedQr}/>}
       </Row>
     </Container>
   );

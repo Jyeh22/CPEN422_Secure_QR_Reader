@@ -28,9 +28,7 @@ export default class QrScanner extends Component {
           data: data.text
         }
       );
-      console.log(res);
-      this.props.setUrl(data.text);
-      this.props.setUrlMetrics(res.data);
+      this.props.setSecurityMetrics(res.data);
       this.props.setDecodedQr(true);
       this.props.setStartScan(false);
     }

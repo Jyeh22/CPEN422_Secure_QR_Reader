@@ -8,8 +8,12 @@ const Header = () => {
 
       <style type="text/css">
         {`
-        .accordion-button {
+        .accordian-header > .accordion-button {
           justify-content: center;
+        }
+        .accordian-header > .accordion-button::after {
+          justify-content: center;
+          margin-left: 4px !important;
         }
       .accordion-button::after {
         flex-shrink: 0;
@@ -20,7 +24,6 @@ const Header = () => {
         background-repeat: no-repeat;
         background-size: var(--bs-accordion-btn-icon-width);
         transition: var(--bs-accordion-btn-icon-transition);
-        margin-left: 4px !important;
       }
       .accordion-button:not(.collapsed)::after {
         content: "Hide details";
@@ -53,7 +56,7 @@ const Header = () => {
       </style>
       <Accordion>
       <Accordion.Item eventKey="0">
-        <Accordion.Header>Protect yourself from malicious QR Codes.</Accordion.Header>
+        <Accordion.Header className='accordian-header'>Protect yourself from malicious QR Codes.</Accordion.Header>
           <Accordion.Body>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
