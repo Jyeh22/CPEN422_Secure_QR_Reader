@@ -28,12 +28,12 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
     
     setKnownSite(securityMetrics.googleTree > 2)
 
-    let age = Date.now() - Date.parse(securityMetrics.date);
+    //let age = Date.now() - Date.parse(securityMetrics.date);
     let minAge = 3 * 2678400; //3 months
-    setDomainAgeValid(age > minAge);
+    setDomainAgeValid(securityMetrics.date > minAge);
 
     setIsDeceptive(!validCert || knownPhish || !knownSite || !domainAgeValid);
-  }, []);
+  }, [validCert, knownPhish, knownSite, domainAgeValid, securityMetrics]);
 
   const getImage = async () => {
     setShow(true);
@@ -107,12 +107,12 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
                       <Accordion style={{width: '100%'}}>
                         <Accordion.Header style={{width:'100%'}}>
                           {!knownPhish ? <FaMinus/> : <FaTimes/>}
-                          <b>Known phishing site</b>
+                          {!knownPhish ? <b>Not a known phishing site</b> : <b>Known phishing site</b>}
                         </Accordion.Header>
                         <Accordion.Body>
                           {knownPhish ? 
-                            'This url has appeared in several databases of known phishing websites' :
-                            'Lorem ipsum'}
+                            'This website has appeared in several databases of known phishing websites' :
+                            'This website does not appear in any of the databses of known phishing websites we checked'}
                         </Accordion.Body>
                       </Accordion>
                     </ListGroup.Item>
@@ -120,10 +120,11 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
                       <Accordion style = {{width:'100%'}}>
                         <Accordion.Header style={{width:'100%'}}>
                           {validCert ? <FaMinus/> : <FaTimes/>} 
-                          <b>Valid certificate</b>
+                          {validCert ?<b>Valid certificate</b> : <b>Invalid certificate</b> }
                         </Accordion.Header>
                         <Accordion.Body>
-                          Lorem ipsum
+                        {validCert ? 'This website posses a valid SSL certificate issued by a trusted authority' : 
+                        'This website does not possess a valid SSL certificate issued by a trusted authority. '}
                         </Accordion.Body>
                       </Accordion>
                     </ListGroup.Item>
@@ -134,7 +135,7 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
                             {knownSite ? <b>Known website</b> : <b>Unknown Website</b>}
                         </Accordion.Header>
                         <Accordion.Body>
-                          This website name has a low score in the <a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">google knowledge graph</a>.
+                          This website name has a {knownSite ? 'reasonably high':'low'} score in the <a href="https://blog.google/products/search/introducing-knowledge-graph-things-not/">google knowledge graph</a>.
                           The graph is a measure of how many times an entity is mentioned in search results.
                         </Accordion.Body>
                       </Accordion>
@@ -146,7 +147,7 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
                           <b>Domain Age: </b> 
                         </Accordion.Header>
                         <Accordion.Body>
-                          This website was created on {securityMetrics.date}
+                          This website was created on {securityMetrics.date}. Websites created more recently tend to be less trustworthy.
                         </Accordion.Body>
                       </Accordion>
                     </ListGroup.Item>

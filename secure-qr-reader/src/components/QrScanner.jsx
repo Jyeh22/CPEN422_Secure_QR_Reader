@@ -18,7 +18,6 @@ export default class QrScanner extends Component {
 
   handleScan = async (data) => {
     if (data != null) {
-      console.log(data);
       this.setState({
         validatingUrl: true,
         result: data,

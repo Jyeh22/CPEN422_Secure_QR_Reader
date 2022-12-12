@@ -3,7 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 const Header = () => {
   return (
-    <header className="App-header">
+    <header className="App-header" style={{marginTop:'2rem'}}>
       <p className="header-title">SeQR</p>
 
       <style type="text/css">
@@ -58,13 +58,8 @@ const Header = () => {
       <Accordion.Item eventKey="0">
         <Accordion.Header className='accordian-header'>Protect yourself from malicious QR Codes.</Accordion.Header>
           <Accordion.Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            QR codes, while convenient, can easily be used by criminals to direct unsuspecting users to malicious websites
+            to conduct phishing scams, spread malware, or redirect payments. 
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
