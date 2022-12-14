@@ -28,9 +28,9 @@ const HandleURL = ({securityMetrics, setDecodedQr}) => {
     
     setKnownSite(securityMetrics.googleTree > 2)
 
-    //let age = Date.now() - Date.parse(securityMetrics.date);
+    let age = Date.now() - Date.parse(securityMetrics.date);
     let minAge = 3 * 2678400; //3 months
-    setDomainAgeValid(securityMetrics.date > minAge);
+    setDomainAgeValid(age > minAge);
 
     setIsDeceptive(!validCert || knownPhish || !knownSite || !domainAgeValid);
   }, [validCert, knownPhish, knownSite, domainAgeValid, securityMetrics]);
